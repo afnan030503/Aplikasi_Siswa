@@ -1,9 +1,11 @@
 package com.example.aplikasisiswa.view
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,6 +24,8 @@ import com.example.aplikasisiswa.navigasi.DestinasiNavigasi
 import com.example.aplikasisiswa.viewmodel.HomeViewModel
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.example.aplikasisiswa.model.Mahasiswa
 import com.example.aplikasisiswa.viewmodel.HomeUiState
 
@@ -134,3 +138,12 @@ when (homeUiState) {
     /**
     * The home screen displaying the loading message.
        */
+
+@Composable
+fun OnLoading(modifier: Modifier = Modifier) {
+        Image(
+            modifier = modifier.size(200.dp),
+            painter = painterResource(R.drawable.loading_img),
+            contentDescription = stringResource(R.string.loading)
+        )
+    }
