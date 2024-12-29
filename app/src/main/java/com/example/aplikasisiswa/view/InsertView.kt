@@ -68,7 +68,7 @@ fun EntryMhsScreen(
 }
 
 @Composable
-fun EnrtyBody(
+fun EntryBody(
     insertUiState: InsertUiState,
     onSiswaValueChange: (InsertUiEvent) -> Unit,
     onSaveClick: ()-> Unit,
