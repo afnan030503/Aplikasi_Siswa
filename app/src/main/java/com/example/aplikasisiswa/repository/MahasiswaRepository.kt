@@ -2,10 +2,9 @@ package com.example.aplikasisiswa.repository
 
 import com.example.aplikasisiswa.model.Mahasiswa
 import com.example.aplikasisiswa.service.MahasiswaService
-import java.io.IOException
+import okio.IOException
 
 interface MahasiswaRepository {
-    abstract val response: Any
 
     suspend fun  getMahasiswa():List<Mahasiswa>
 
@@ -17,7 +16,6 @@ interface MahasiswaRepository {
 
     suspend fun getMahasiswabyNim(nim: String):Mahasiswa
 }
-
 class NetworkMahasiswaRepository(
     private val mahasiswaApiService: MahasiswaService
 ) : MahasiswaRepository {
@@ -36,18 +34,16 @@ class NetworkMahasiswaRepository(
     override suspend fun deleteMahasiswa(nim: String) {
         try {
             val response = mahasiswaApiService.deleteMahasiswa(nim)
-            if (!response.isSuccessful)
+            if (!response.isSuccessful) {
                 throw IOException(
-                    "Failed to delete Mahasiswa. PHP Status Code: " +
-                            "${response.code()}"
+                    "Failed to delete Mahasiswa. HTTP Status Code: ${response.code()}"
                 )
-        }else{
-            response.message()
-            println(response.message)
+            } else {
+                println(response.message())
+            }
+        } catch (e: Exception) {
+            throw e
         }
-    }catch (e:Exception)
-    {
-        throw e
     }
 
     override suspend fun getMahasiswabyNim(nim: String): Mahasiswa {
