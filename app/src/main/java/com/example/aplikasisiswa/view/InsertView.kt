@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.aplikasisiswa.cmwidget.CostumeTopAppBar
 import com.example.aplikasisiswa.navigasi.DestinasiNavigasi
+import com.example.aplikasisiswa.viewmodel.InsertUiEvent
+import com.example.aplikasisiswa.viewmodel.InsertUiState
 import com.example.aplikasisiswa.viewmodel.InsertViewModel
 import kotlinx.coroutines.launch
 
@@ -58,3 +60,11 @@ fun EntryMhsScreen(
         )
     }
 }
+
+@Composable
+fun EnrtyBody(
+    insertUiState: InsertUiState,
+    onSiswaValueChange: (InsertUiEvent) -> Unit,
+    onSaveClick: ()-> Unit,
+    modifier: Modifier= Modifier
+){}
