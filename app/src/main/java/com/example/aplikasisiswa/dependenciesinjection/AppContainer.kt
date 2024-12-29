@@ -1,6 +1,7 @@
 package com.example.aplikasisiswa.dependenciesinjection
 
 import com.example.aplikasisiswa.repository.MahasiswaRepository
+import com.example.aplikasisiswa.repository.NetworkMahasiswaRepository
 import com.example.aplikasisiswa.service.MahasiswaService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -13,7 +14,7 @@ interface AppContainer {
 
 class MahasiswaContainer: AppContainer{
 
-    private val baseUrl = "http://10.0.2.2:8000/umyTI/" //localhost diganti ip kalo di run di hp
+    private val baseUrl = "http://10.0.2.2:80/umyTI/" //localhost diganti ip kalo di run di hp
     private val json = Json { ignoreUnknownKeys= true }
     private val retrofit: Retrofit = Retrofit.Builder()
         .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
@@ -23,6 +24,6 @@ class MahasiswaContainer: AppContainer{
 
     }
     override val kontakRepository: MahasiswaRepository by lazy {
-        NetworkKontakRepository(mahasiswaService)
+        NetworkMahasiswaRepository(mahasiswaService)
     }
 }

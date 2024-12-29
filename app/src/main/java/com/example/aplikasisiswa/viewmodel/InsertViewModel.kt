@@ -2,6 +2,7 @@ package com.example.aplikasisiswa.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplikasisiswa.model.Mahasiswa
@@ -44,6 +45,14 @@ fun Mahasiswa.toUiStateMhs(): InsertUiState = InsertUiState(
     insertUiEvent = toInsertUiEvent()
 )
 
+fun InsertUiEvent.toMhs(): Mahasiswa = Mahasiswa(
+    nim = nim,
+    nama= nama,
+    alamat = alamat,
+    jenisKelamin = jeniskelamin,
+    kelas = kelas,
+    angkatan = angkatan
+)
 fun Mahasiswa.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
     nim = nim,
     nama = nama,

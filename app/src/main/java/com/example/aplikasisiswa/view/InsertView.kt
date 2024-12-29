@@ -27,6 +27,7 @@ import com.example.aplikasisiswa.navigasi.DestinasiNavigasi
 import com.example.aplikasisiswa.viewmodel.InsertUiEvent
 import com.example.aplikasisiswa.viewmodel.InsertUiState
 import com.example.aplikasisiswa.viewmodel.InsertViewModel
+import com.example.aplikasisiswa.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
 object DestinasiEntry : DestinasiNavigasi {
