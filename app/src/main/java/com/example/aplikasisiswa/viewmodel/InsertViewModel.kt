@@ -1,7 +1,15 @@
 package com.example.aplikasisiswa.viewmodel
 
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
 import com.example.aplikasisiswa.model.Mahasiswa
+import com.example.aplikasisiswa.repository.MahasiswaRepository
 
+
+class InsertViewModel(private val mhs: MahasiswaRepository): ViewModel(){
+    var uiState by mutableStateOf(InsertUiState())
+        private set
+}
 data class InsertUiState(
     val insertUiEvent: InsertUiEvent = InsertUiEvent()
 )
