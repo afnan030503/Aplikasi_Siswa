@@ -18,3 +18,12 @@ data class InsertUiEvent(
 fun Mahasiswa.toUiStateMhs(): InsertUiState = InsertUiState(
     insertUiEvent = toInsertUiEvent()
 )
+
+fun Mahasiswa.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
+    nim = nim,
+    nama = nama,
+    alamat = alamat,
+    jeniskelamin = jenisKelamin,
+    kelas = kelas,
+    angkatan = angkatan
+)
