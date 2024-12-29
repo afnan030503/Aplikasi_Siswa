@@ -52,7 +52,7 @@ fun EntryMhsScreen(
     ) { innerPadding ->
         EntryBody(
             insertUiState = viewModel.uiState,
-            onSiswaValueChange = viewModel::updatelnsertMhsState,
+            onSiswaValueChange = viewModel::updateInsertMhsState,
             onSaveClick = {
                 coroutineScope.launch {
                     viewModel.insertMhs()
@@ -78,7 +78,7 @@ fun EntryBody(
         verticalArrangement = Arrangement.spacedBy(18.dp),
         modifier = modifier.padding(12.dp)
     ) {
-        Formlnput(
+        FormInput(
             insertUiEvent = insertUiState.insertUiEvent,
             onValueChange = onSiswaValueChange,
             modifier = Modifier.fillMaxWidth()
@@ -92,3 +92,11 @@ fun EntryBody(
         }
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun FormInput(
+    insertUiEvent: InsertUiEvent,
+    modifier: Modifier = Modifier,
+    onValueChange: (InsertUiEvent) -> Unit ={},
+    enabled: Boolean = true
+)
