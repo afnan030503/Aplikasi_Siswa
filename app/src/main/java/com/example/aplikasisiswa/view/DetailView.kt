@@ -34,9 +34,10 @@ import com.example.aplikasisiswa.viewmodel.PenyediaViewModel
 
 object DestinasiDetail : DestinasiNavigasi {
     override val route = "detail"
+    override val titleRes = "Detail Mahasiswa"
     const val NIM = "nim"
-    val routesWithArg = "$route/{NIM}"
-    override val titleRes = "Detail Mhs"
+    val routesWithArg = "$route/{$NIM}"
+
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -107,9 +108,6 @@ fun BodydetailMhs(
                 retryAction = retryAction,
                 modifier = modifier.fillMaxSize()
             )
-        }
-        else -> {
-            Text("Unexpected state encountered")
         }
     }
 

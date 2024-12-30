@@ -9,7 +9,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 
 interface AppContainer {
-    val kontakRepository: MahasiswaRepository
+    val mahasiswaRepository: MahasiswaRepository
 }
 
 class MahasiswaContainer: AppContainer{
@@ -23,7 +23,7 @@ class MahasiswaContainer: AppContainer{
         retrofit.create(MahasiswaService::class.java)
 
     }
-    override val kontakRepository: MahasiswaRepository by lazy {
+    override val mahasiswaRepository: MahasiswaRepository by lazy {
         NetworkMahasiswaRepository(mahasiswaService)
     }
 }

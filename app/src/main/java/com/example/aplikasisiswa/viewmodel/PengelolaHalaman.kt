@@ -28,7 +28,7 @@ fun PengelolaHalaman(
     ) {
         composable(DestinasiHome.route) {
             HomeScreen(
-                navigateToltemEntry = { navController.navigate(DestinasiEntry.route) },
+                navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
                 onDetailClick = { nim ->
                     navController.navigate("${DestinasiDetail.route}/$nim") {
                         popUpTo(DestinasiHome.route){

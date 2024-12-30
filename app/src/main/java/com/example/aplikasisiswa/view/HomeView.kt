@@ -39,7 +39,6 @@ import com.example.aplikasisiswa.viewmodel.HomeViewModel
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.aplikasisiswa.R
@@ -54,7 +53,7 @@ object DestinasiHome : DestinasiNavigasi {
 @OptIn(ExperimentalMaterial3Api :: class)
 @Composable
 fun HomeScreen(
-    navigateToltemEntry: () -> Unit,
+    navigateToItemEntry: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (String) -> Unit = {},
     viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
@@ -75,7 +74,7 @@ fun HomeScreen(
     },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = navigateToltemEntry,
+                onClick = navigateToItemEntry,
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(18.dp)
             ) {
@@ -167,14 +166,14 @@ fun MhsLayout(
         verticalArrangement = Arrangement.spacedBy(16.dp)
 
     ) {
-        items(mahasiswa) { kontak ->
+        items(mahasiswa) { mahasiswa ->
             MhsCard(
-                mahasiswa = kontak,
+                mahasiswa = mahasiswa,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { onDetailClick(kontak) },
+                    .clickable { onDetailClick(mahasiswa) },
                 onDeleteClick = {
-                    onDeleteClick(kontak)
+                    onDeleteClick(mahasiswa)
                 }
             )
         }
