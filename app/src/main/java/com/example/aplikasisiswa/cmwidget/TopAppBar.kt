@@ -29,7 +29,7 @@ fun CostumeTopAppBar(
             Icon(
                 imageVector = Icons.Default.Refresh,
                 contentDescription = "",
-                modifier = androidx.compose.ui.Modifier.clickable {
+                modifier = Modifier.clickable {
                     onRefresh()
 
                 })

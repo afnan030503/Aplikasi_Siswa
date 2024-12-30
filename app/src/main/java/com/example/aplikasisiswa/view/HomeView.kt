@@ -49,7 +49,7 @@ import com.example.aplikasisiswa.viewmodel.PenyediaViewModel
 
 object DestinasiHome : DestinasiNavigasi {
     override val route = "home"
-    override val titleRes = "Home Mhs"
+    override val titleRes = "Halaman Mahasiswa"
 }
 @OptIn(ExperimentalMaterial3Api :: class)
 @Composable
@@ -99,7 +99,7 @@ fun HomeStatus(
     homeUiState: HomeUiState,
     retryAction: () -> Unit,
     modifier: Modifier = Modifier,
-    onDeleteClick: (Mahasiswa) -> Unit = {},
+    onDeleteClick: (Mahasiswa) -> Unit,
     onDetailClick: (String) -> Unit
 ){
 when (homeUiState) {
@@ -172,7 +172,7 @@ fun MhsLayout(
                 mahasiswa = kontak,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { onDeleteClick(kontak) },
+                    .clickable { onDetailClick(kontak) },
                 onDeleteClick = {
                     onDeleteClick(kontak)
                 }
