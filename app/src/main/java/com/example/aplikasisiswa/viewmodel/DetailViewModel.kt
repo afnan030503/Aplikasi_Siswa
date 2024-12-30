@@ -1,41 +1,67 @@
 package com.example.aplikasisiswa.viewmodel
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.aplikasisiswa.model.Mahasiswa
 import com.example.aplikasisiswa.repository.MahasiswaRepository
+import com.example.aplikasisiswa.view.DestinasiDetail
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+sealed class DetailUiState {
+    data class Success(val mahasiswa: Mahasiswa) : DetailUiState()
+    object Error : DetailUiState()
+    object Loading : DetailUiState()
+}
+
 class DetailViewModel(
-    private val repository: MahasiswaRepository
+    savedStateHandle: SavedStateHandle,
+    private val mhs: MahasiswaRepository
 ) : ViewModel() {
 
-    private val _detailUiState = MutableStateFlow(DetailUiState())
-    val detailUiState: StateFlow<DetailUiState> = _detailUiState.asStateFlow()
+    private val _nim: String = checkNotNull(savedStateHandle[DestinasiDetail.NIM])
+    // StateFlow untuk menyimpan status UI
 
-    fun fetchDetailMahasiswa(nim: String) {
+    private val _detailUiState = MutableStateFlow<DetailUiState>(DetailUiState.Loading)
+    val detailUiState: StateFlow<DetailUiState> = _detailUiState
+    init {
+        getDetailMahasiswa()
+    }
+
+
+    fun getDetailMahasiswa() {
         viewModelScope.launch {
-            _detailUiState.value = _detailUiState.value.copy(isLoading = true)
             try {
-                val mahasiswa = repository.getMahasiswaByNim(nim)
-                _detailUiState.value = _detailUiState.value.copy(
-                    isLoading = false,
-                    detailUiEvent = mahasiswa?.toUiEvent() ?: DetailUiEvent()
-                )
+                // Set loading state
+                _detailUiState.value = DetailUiState.Loading
+
+                // Fetch mahasiswa data dari repository
+                val mahasiswa = mhs.getMahasiswabyNim(_nim)
+
+                if (mahasiswa != null) {
+                    // Jika data ditemukan, emit sukses
+                    _detailUiState.value = DetailUiState.Success(mahasiswa)
+                } else {
+                    // Jika data tidak ditemukan, emit error
+                    _detailUiState.value = DetailUiState.Error
+                }
             } catch (e: Exception) {
-                _detailUiState.value = _detailUiState.value.copy(isLoading = false)
+                // Emit error jika terjadi exception
+                _detailUiState.value = DetailUiState.Error
             }
         }
     }
-
-    fun deleteMhs(nim: String) {
-        viewModelScope.launch {
-            try {
-                repository.deleteMahasiswaByNim(nim)
-            } catch (e: Exception) {
-                // Tangani error
-            }
-        }
-    }
+}
+//memindahkan data dari entity ke ui
+fun Mahasiswa.toDetailUiEvent(): InsertUiEvent {
+    return InsertUiEvent(
+        nim = nim,
+        nama = nama,
+        jeniskelamin = jenisKelamin,
+        alamat = alamat,
+        kelas = kelas,
+        angkatan = angkatan
+    )
 }

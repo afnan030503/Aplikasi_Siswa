@@ -1,6 +1,7 @@
 package com.example.aplikasisiswa.view
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,7 +37,9 @@ import com.example.aplikasisiswa.cmwidget.CostumeTopAppBar
 import com.example.aplikasisiswa.navigasi.DestinasiNavigasi
 import com.example.aplikasisiswa.viewmodel.HomeViewModel
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.aplikasisiswa.R
@@ -129,7 +132,7 @@ when (homeUiState) {
 fun OnLoading(modifier: Modifier = Modifier) {
         Image(
             modifier = modifier.size(200.dp),
-            painter = painterResource(R.drawable.loading_image),
+            painter = painterResource(R.drawable.loading_image1),
             contentDescription = stringResource(R.string.Loading)
         )
     }
@@ -142,7 +145,7 @@ fun OnError(retryAction: () -> Unit,modifier: Modifier= Modifier){
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_connection_error), contentDescription = ""
+            painter = painterResource(id = R.drawable.error), contentDescription = ""
         )
         Text(text = stringResource(R.string.loading_failed),modifier = Modifier.padding(16.dp))
         Button(onClick = retryAction) {
@@ -189,8 +192,11 @@ fun MhsCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .background(Color.Transparent),
+            verticalArrangement = Arrangement.spacedBy(28.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -207,12 +213,12 @@ fun MhsCard(
                         contentDescription = null,
                     )
                 }
-                Text(
-                    text = mahasiswa.nim,
-                    style = MaterialTheme.typography.titleMedium
-                )
-            }
 
+            }
+            Text(
+                text = mahasiswa.nim,
+                style = MaterialTheme.typography.titleMedium
+            )
             Text(
                 text = mahasiswa.kelas,
                 style = MaterialTheme.typography.titleMedium

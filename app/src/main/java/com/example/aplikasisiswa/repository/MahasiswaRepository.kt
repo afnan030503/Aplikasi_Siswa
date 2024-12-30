@@ -26,7 +26,7 @@ class NetworkMahasiswaRepository(
     override suspend fun insertMahasiswa(mahasiswa: Mahasiswa) {
         mahasiswaApiService.insertMahasiswa(mahasiswa)
     }
-
+     
     override suspend fun updateMahasiswa(nim: String, mahasiswa: Mahasiswa) {
         mahasiswaApiService.updateMahasiswa(nim, mahasiswa)
     }
